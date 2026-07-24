@@ -768,6 +768,11 @@
 </head>
 <body>
 
+  <!-- Background Audio -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="love.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- SPLASH -->
   <div class="splash" id="splash">
     <h1>Para Ros</h1>
@@ -888,8 +893,13 @@
     }
     const hearts = progressEl.querySelectorAll('.progress-heart');
 
-    // Splash → Book
+    // Splash → Book + Audio
+    const bgMusic = document.getElementById('bgMusic');
     openBtn.addEventListener('click', () => {
+      // Play background audio
+      bgMusic.volume = 0.5;
+      bgMusic.play().catch(e => console.log('Audio play prevented:', e));
+
       splash.classList.add('hidden');
       setTimeout(() => {
         bookScene.classList.add('visible');
